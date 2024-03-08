@@ -1,39 +1,45 @@
 ﻿@page "/"
 @using Models
+@inject NavigationManager NavigationManager
 
 <PageTitle>Game Catalog</PageTitle>
 
 <h1>Game Catalog</h1>
+<div class="row mb-4">
+    <div class="col-sm-6">
+        <button type="button" class="btn btn-primary" @onclick="CreateGame">new Game</button>
+     </div>
+
+</div>
 
 @if (games is null)
 {
-            <p><em>Loading...</em></p>
+                        <p><em>Loading...</em></p>
 }
 else
 {
-         <table class="table table-striped table bordered table hover">
+        <table class="table table-striped table bordered table hover">
             <thead class="table-dark">
-                <th>Id</th>
-                <th>Name</th>
-                <th>Genre</th>
-                <th>Price</th>
-                <th>Release Date</th>
-
-            </thead>
-            <tbody>
+                 <th>Id</th>
+                 <th>Name</th>
+                 <th>Genre</th>
+                 <th>Price</th>
+                 <th>Release Date</th>
+             </thead>
+             <tbody>
             @foreach (var game in games) //games is a list of Game objects
             {
-                                                 <tr>
-                                                     <td>@game.Id</td>
-                                                     <td>@game.Name</td>
-                                                     <td>@game.Genre</td>
-                                                     <td>@game.Price</td>
-                                                     <td>@game.ReleaseDate.ToString("MM/dd/yyyy")</td>
+                        <tr>
+                            <td>@game.Id</td>
+                            <td>@game.Name</td>
+                            <td>@game.Genre</td>
+                            <td>@game.Price</td>
+                            <td>@game.ReleaseDate.ToString("MM/dd/yyyy")</td>
 
-                                                 </tr>
+                        </tr>
             }
-            </tbody>
-        </table>
+             </tbody>
+         </table>
 }
 
 
@@ -44,5 +50,10 @@ else
     protected override void OnInitialized()
     {
         games = GameClient.GetGames();
+    }
+
+    private void CreateGame()
+    {
+        NavigationManager.NavigateTo("/game");
     }
 }

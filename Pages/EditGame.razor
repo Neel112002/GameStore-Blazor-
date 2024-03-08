@@ -9,14 +9,23 @@
 
 <div class="row">
     <div class="col-sm-4">
-        <EditForm Model="@game" OnSubmit="HandleSubmit">
-            <div class="mb-3">
+        <EditForm Model="@game" OnValidSubmit="HandleSubmit">
+            <DataAnnotationsValidator/>
+            <ValidationSummary />
+             <div class="mb-3">
                 <label for="name"class="form-label">Name</label>
                 <InputText id="name" class="form-control" @bind-Value="game.Name" />
             </div>
             <div class="mb-3">
                 <label for="genre"class="form-label">Genre</label>
-                <InputText id="genre" class="form-control" @bind-Value="game.Genre" />
+                <InputSelect id="genre" class="form-select" @bind-Value="game.Genre" >
+                <option value="">Select Genre</option>
+                <option value="Action">Action</option>
+                <option value="Kids and family">Kids and family</option>
+                <option value="Racing">Racing</option>
+                <option value="RolePlaying">RolePlaying</option>
+                <option value="Sports">Sports</option>
+                </InputSelect>
             </div>
             <div class="mb-3">
                 <label for="price"class="form-label">Price</label>
@@ -26,7 +35,8 @@
                 <label for="releaseDate"class="form-label">Release Date</label>
                 <InputDate id="releaseDate" class="form-control" @bind-Value="game.ReleaseDate" />
             </div>
-            <button type="submit class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" @onclick="@Cancel">Cancel</button>
         </EditForm>
     </div>
 </div>
@@ -42,6 +52,11 @@
     private void HandleSubmit()
     {
         GameClient.AddGame(game);
+        NavigationManager.NavigateTo("/");
+    }
+
+    private void Cancel()
+    {
         NavigationManager.NavigateTo("/");
     }
 }

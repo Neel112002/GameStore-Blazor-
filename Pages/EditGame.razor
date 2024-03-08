@@ -8,8 +8,23 @@
 
 <div class="row">
     <div class="col-sm-4">
-        <EditForm>
-
+        <EditForm Model="@game">
+            <div class="mb-3">
+                <label for="name"class="form-label">Name</label>
+                <InputText id="name" class="form-control" @bind-Value="game.Name" />
+            </div>
+            <div class="mb-3">
+                <label for="genre"class="form-label">Genre</label>
+                <InputText id="genre" class="form-control" @bind-Value="game.Genre" />
+            </div>
+            <div class="mb-3">
+                <label for="price"class="form-label">Price</label>
+                <InputNumber id="price" class="form-control" @bind-Value="game.Price" />
+            </div>
+            <div class="mb-3">
+                <label for="releaseDate"class="form-label">Release Date</label>
+                <InputDate id="releaseDate" class="form-control" @bind-Value="game.ReleaseDate" />
+            </div>
         </EditForm>
     </div>
 </div>
